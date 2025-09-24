@@ -2,11 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/dashboard/budget', function () {
+Route::get('/', function () {
     return view('dashboards.budget');
 })->name('dashboard.budget');
 
