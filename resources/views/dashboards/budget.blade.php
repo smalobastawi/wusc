@@ -6,7 +6,7 @@
     <div class="space-y-4">
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
             <h2 class="text-lg font-semibold mb-3">Budget Distribution Charts</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                 <div>
                     <h3 class="text-base font-medium mb-1 text-center">Budget Allocation</h3>
                     <div class="chart-container" style="height: 220px">
@@ -19,15 +19,25 @@
                         <canvas id="budgetBarChart"></canvas>
                     </div>
                 </div>
+                <div>
+                    <h3 class="text-base font-medium mb-1 text-center">Budget Status</h3>
+                    <div class="chart-container" style="height: 220px">
+                        <canvas id="budgetStatusPieChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
             <h2 class="text-lg font-semibold mb-3">Budget Overview in figures</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
                 <div class="bg-blue-50 dark:bg-blue-900 p-3 rounded-lg">
                     <h3 class="text-sm font-medium text-blue-800 dark:text-blue-200">Total Budget</h3>
                     <p class="text-xl font-bold text-blue-600 dark:text-blue-400">$1,000,000</p>
+                </div>
+                <div class="bg-purple-50 dark:bg-purple-900 p-3 rounded-lg">
+                    <h3 class="text-sm font-medium text-purple-800 dark:text-purple-200">Committed</h3>
+                    <p class="text-xl font-bold text-purple-600 dark:text-purple-400">$850,000</p>
                 </div>
                 <div class="bg-green-50 dark:bg-green-900 p-3 rounded-lg">
                     <h3 class="text-sm font-medium text-green-800 dark:text-green-200">Spent</h3>
@@ -48,6 +58,7 @@
                         <tr class="bg-gray-50 dark:bg-gray-700">
                             <th class="px-3 py-2 text-left">Category</th>
                             <th class="px-3 py-2 text-left">Allocated</th>
+                            <th class="px-3 py-2 text-left">Committed</th>
                             <th class="px-3 py-2 text-left">Spent</th>
                             <th class="px-3 py-2 text-left">Remaining</th>
                             <th class="px-3 py-2 text-left">Status</th>
@@ -57,6 +68,7 @@
                         <tr class="border-t">
                             <td class="px-3 py-2">Personnel</td>
                             <td class="px-3 py-2">$400,000</td>
+                            <td class="px-3 py-2">$380,000</td>
                             <td class="px-3 py-2">$350,000</td>
                             <td class="px-3 py-2">$50,000</td>
                             <td class="px-3 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">On
@@ -64,6 +76,7 @@
                         </tr>
                         <tr class="border-t">
                             <td class="px-3 py-2">Equipment</td>
+                            <td class="px-3 py-2">$300,000</td>
                             <td class="px-3 py-2">$300,000</td>
                             <td class="px-3 py-2">$280,000</td>
                             <td class="px-3 py-2">$20,000</td>
@@ -73,6 +86,7 @@
                         <tr class="border-t">
                             <td class="px-3 py-2">Travel</td>
                             <td class="px-3 py-2">$150,000</td>
+                            <td class="px-3 py-2">$120,000</td>
                             <td class="px-3 py-2">$100,000</td>
                             <td class="px-3 py-2">$50,000</td>
                             <td class="px-3 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">On
@@ -81,6 +95,7 @@
                         <tr class="border-t">
                             <td class="px-3 py-2">Miscellaneous</td>
                             <td class="px-3 py-2">$150,000</td>
+                            <td class="px-3 py-2">$50,000</td>
                             <td class="px-3 py-2">$20,000</td>
                             <td class="px-3 py-2">$130,000</td>
                             <td class="px-3 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">On
@@ -186,7 +201,7 @@
                 </li>
                 <li class="flex items-center">
                     <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>
-                    What have I already committed/spent? <strong class="ml-1">$750,000 spent</strong>
+                    What have I already committed/spent? <strong class="ml-1">$850,000 committed, $750,000 spent</strong>
                 </li>
                 <li class="flex items-center">
                     <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>
@@ -276,6 +291,14 @@
                         barPercentage: 0.6,
                         categoryPercentage: 0.8
                     }, {
+                        label: 'Committed',
+                        data: [380000, 300000, 120000, 50000],
+                        backgroundColor: '#8B5CF6',
+                        borderColor: '#8B5CF6',
+                        borderWidth: 1,
+                        barPercentage: 0.6,
+                        categoryPercentage: 0.8
+                    }, {
                         label: 'Spent',
                         data: [350000, 280000, 100000, 20000],
                         backgroundColor: '#10B981',
@@ -332,6 +355,67 @@
                                         label += ': ';
                                     }
                                     label += '$' + context.parsed.y.toLocaleString();
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // New Pie Chart for Budget Status (Budgeted, Committed, Spent)
+            const statusPieCtx = document.getElementById('budgetStatusPieChart').getContext('2d');
+            new Chart(statusPieCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Budgeted', 'Committed', 'Spent'],
+                    datasets: [{
+                        data: [1000000, 850000, 750000],
+                        backgroundColor: [
+                            '#3B82F6', // Blue for Budgeted
+                            '#8B5CF6', // Purple for Committed
+                            '#10B981' // Green for Spent
+                        ],
+                        hoverBackgroundColor: [
+                            '#2563EB',
+                            '#7C3AED',
+                            '#059669'
+                        ],
+                        borderWidth: 1,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 10,
+                                font: {
+                                    size: 10
+                                },
+                                boxWidth: 12
+                            }
+                        },
+                        tooltip: {
+                            bodyFont: {
+                                size: 10
+                            },
+                            titleFont: {
+                                size: 10
+                            },
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    const value = context.parsed;
+                                    const total = 1000000; // Total budget
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    label += '$' + value.toLocaleString() + ' (' + percentage + '%)';
                                     return label;
                                 }
                             }

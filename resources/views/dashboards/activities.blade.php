@@ -43,8 +43,6 @@
             </div>
         </div>
 
-
-
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
             <h2 class="text-lg font-semibold mb-3">Project Activities</h2>
             <div class="overflow-x-auto">
@@ -54,6 +52,9 @@
                             <th class="px-3 py-2 text-left">Activity</th>
                             <th class="px-3 py-2 text-left">Start Date</th>
                             <th class="px-3 py-2 text-left">End Date</th>
+                            <th class="px-3 py-2 text-left">Assigned</th>
+                            <th class="px-3 py-2 text-left">Budget Code</th>
+                            <th class="px-3 py-2 text-left">Allocated Amount</th>
                             <th class="px-3 py-2 text-left">Status</th>
                             <th class="px-3 py-2 text-left">Progress</th>
                         </tr>
@@ -63,6 +64,14 @@
                             <td class="px-3 py-2">Project Planning</td>
                             <td class="px-3 py-2">2024-01-01</td>
                             <td class="px-3 py-2">2024-01-15</td>
+                            <td class="px-3 py-2">
+                                <div class="flex flex-col">
+                                    <span>John Smith</span>
+                                    <span class="text-xs text-gray-500">Project Manager</span>
+                                </div>
+                            </td>
+                            <td class="px-3 py-2">PLAN-001</td>
+                            <td class="px-3 py-2">$25,000</td>
                             <td class="px-3 py-2"><span
                                     class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Completed</span></td>
                             <td class="px-3 py-2">100%</td>
@@ -71,6 +80,14 @@
                             <td class="px-3 py-2">Resource Allocation</td>
                             <td class="px-3 py-2">2024-01-16</td>
                             <td class="px-3 py-2">2024-02-01</td>
+                            <td class="px-3 py-2">
+                                <div class="flex flex-col">
+                                    <span>Sarah Johnson</span>
+                                    <span class="text-xs text-gray-500">HR Manager</span>
+                                </div>
+                            </td>
+                            <td class="px-3 py-2">RES-002</td>
+                            <td class="px-3 py-2">$50,000</td>
                             <td class="px-3 py-2"><span
                                     class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Completed</span></td>
                             <td class="px-3 py-2">100%</td>
@@ -79,6 +96,14 @@
                             <td class="px-3 py-2">Development Phase 1</td>
                             <td class="px-3 py-2">2024-02-02</td>
                             <td class="px-3 py-2">2024-04-01</td>
+                            <td class="px-3 py-2">
+                                <div class="flex flex-col">
+                                    <span>Michael Chen</span>
+                                    <span class="text-xs text-gray-500">Lead Developer</span>
+                                </div>
+                            </td>
+                            <td class="px-3 py-2">DEV-003</td>
+                            <td class="px-3 py-2">$150,000</td>
                             <td class="px-3 py-2"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">In
                                     Progress</span></td>
                             <td class="px-3 py-2">75%</td>
@@ -87,6 +112,14 @@
                             <td class="px-3 py-2">Testing</td>
                             <td class="px-3 py-2">2024-04-02</td>
                             <td class="px-3 py-2">2024-05-01</td>
+                            <td class="px-3 py-2">
+                                <div class="flex flex-col">
+                                    <span>Emily Rodriguez</span>
+                                    <span class="text-xs text-gray-500">QA Lead</span>
+                                </div>
+                            </td>
+                            <td class="px-3 py-2">TEST-004</td>
+                            <td class="px-3 py-2">$75,000</td>
                             <td class="px-3 py-2"><span
                                     class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">Delayed</span></td>
                             <td class="px-3 py-2">30%</td>
@@ -95,12 +128,71 @@
                             <td class="px-3 py-2">Deployment</td>
                             <td class="px-3 py-2">2024-05-02</td>
                             <td class="px-3 py-2">2024-05-15</td>
+                            <td class="px-3 py-2">
+                                <div class="flex flex-col">
+                                    <span>David Wilson</span>
+                                    <span class="text-xs text-gray-500">Ops Engineer</span>
+                                </div>
+                            </td>
+                            <td class="px-3 py-2">DEP-005</td>
+                            <td class="px-3 py-2">$40,000</td>
                             <td class="px-3 py-2"><span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">Not
                                     Started</span></td>
                             <td class="px-3 py-2">0%</td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+            <h2 class="text-lg font-semibold mb-3">Budget Allocation by Activity</h2>
+            <div class="space-y-3">
+                <div>
+                    <div class="flex justify-between text-xs mb-1">
+                        <span>Development Phase 1 - $150,000</span>
+                        <span>30.0% of total</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-1.5">
+                        <div class="bg-blue-600 h-1.5 rounded-full" style="width: 75%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-xs mb-1">
+                        <span>Testing - $75,000</span>
+                        <span>15.0% of total</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-1.5">
+                        <div class="bg-yellow-600 h-1.5 rounded-full" style="width: 30%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-xs mb-1">
+                        <span>Resource Allocation - $50,000</span>
+                        <span>10.0% of total</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-1.5">
+                        <div class="bg-green-600 h-1.5 rounded-full" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-xs mb-1">
+                        <span>Deployment - $40,000</span>
+                        <span>8.0% of total</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-1.5">
+                        <div class="bg-gray-600 h-1.5 rounded-full" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-xs mb-1">
+                        <span>Project Planning - $25,000</span>
+                        <span>5.0% of total</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-1.5">
+                        <div class="bg-green-600 h-1.5 rounded-full" style="width: 100%"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -145,6 +237,10 @@
                 <li class="flex items-center">
                     <span class="w-1.5 h-1.5 bg-yellow-500 rounded-full mr-2"></span>
                     Activities at risk: <strong class="ml-1">Testing phase needs attention</strong>
+                </li>
+                <li class="flex items-center">
+                    <span class="w-1.5 h-1.5 bg-purple-500 rounded-full mr-2"></span>
+                    Total budget allocated to activities: <strong class="ml-1">$340,000</strong>
                 </li>
             </ul>
         </div>
@@ -319,6 +415,32 @@
 
         .text-base {
             font-size: 1rem;
+        }
+
+        /* Table styling for better readability */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            font-weight: 600;
+            background-color: #f9fafb;
+        }
+
+        .dark th {
+            background-color: #374151;
+        }
+
+        .dark td {
+            border-bottom-color: #4b5563;
         }
     </style>
 @endsection
