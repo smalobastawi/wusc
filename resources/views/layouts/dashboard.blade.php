@@ -25,17 +25,39 @@
         /* Custom styles to ensure Bootstrap and Tailwind work together */
         .sidebar {
             width: 16rem;
+            transition: transform 0.3s ease-in-out;
         }
 
         @media (max-width: 768px) {
             .sidebar {
                 width: 100%;
                 height: auto;
-                position: relative;
+                position: absolute;
+                z-index: 1000;
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
             }
 
             .flex.h-screen {
                 flex-direction: column;
+            }
+
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+
+            .overlay.active {
+                display: block;
             }
         }
 
@@ -54,6 +76,42 @@
             margin-right: 12px;
             text-align: center;
         }
+
+        .toggle-btn {
+            display: none;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: #4b5563;
+        }
+
+        @media (max-width: 768px) {
+            .toggle-btn {
+                display: block;
+            }
+        }
+
+        .close-btn {
+            display: none;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: #4b5563;
+        }
+
+        @media (max-width: 768px) {
+            .close-btn {
+                display: block;
+            }
+        }
     </style>
 </head>
 
@@ -61,6 +119,9 @@
     <div class="flex h-screen">
         <!-- Sidebar -->
         <div class="sidebar bg-white dark:bg-gray-800 shadow-lg">
+            <button class="close-btn" id="closeSidebar">
+                <i class="bi bi-x-lg"></i>
+            </button>
             <div class="p-4 p-md-5">
                 <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
                     <i class="bi bi-speedometer2 me-2"></i>Dashboard
@@ -90,9 +151,15 @@
             </nav>
         </div>
 
+        <!-- Overlay for mobile -->
+        <div class="overlay" id="overlay"></div>
+
         <!-- Main Content -->
         <div class="flex-1 d-flex flex-column">
-            <header class="bg-white dark:bg-gray-800 shadow-sm p-4 p-md-5">
+            <header class="bg-white dark:bg-gray-800 shadow-sm p-4 p-md-5 position-relative">
+                <button class="toggle-btn" id="toggleSidebar">
+                    <i class="bi bi-list"></i>
+                </button>
                 <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-200">@yield('title', 'Dashboard')</h1>
             </header>
             <main class="flex-1 p-4 p-md-5 overflow-auto">
@@ -103,6 +170,48 @@
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('toggleSidebar');
+            const closeBtn = document.getElementById('closeSidebar');
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.getElementById('overlay');
+
+            // Toggle sidebar on button click
+            toggleBtn.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+            });
+
+            // Close sidebar on close button click
+            closeBtn.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+
+            // Close sidebar when clicking on overlay
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+
+            // Close sidebar when clicking on a navigation link (on mobile)
+            const navLinks = document.querySelectorAll('.bootstrap-override a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.style.overflow = ''; // Restore scrolling
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
